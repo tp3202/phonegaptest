@@ -9,7 +9,9 @@
  <script  type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
  <script  type="text/javascript" src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"></link>
- 
+ <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+ <link href='http://fonts.googleapis.com/css?family=Lobster|Droid+Serif:400,700' rel='stylesheet' type='text/css'>
+ <!--font-family: 'Lobster', cursive;  font-family: 'Droid Serif', serif;-->
  <style>
  .ui-bar-a, .ui-page-theme-a .ui-bar-inherit, html .ui-bar-a .ui-bar-inherit, html .ui-body-a .ui-bar-inherit, html body .ui-group-theme-a .ui-bar-inherit
 {
@@ -62,6 +64,10 @@ alert($("#email").id);
 <body style="font-familty:impact !important;backgroud-color:rgba(192,255,192,0.1) !important;">
 
 
+
+<!------------------------------------------------------------------>
+<!----------------------------Signup-------------------------------->
+<!------------------------------------------------------------------>
 <section data-role="page" id="signup" data-bind="with:SignUpPage"  >
 
 <!--rgba(0,255,192,0.05)  rgba(255,255,0,0.05)-->
@@ -73,24 +79,31 @@ alert($("#email").id);
 	    font-family:impact;
 	    
 	">K O M I T  </div>	
-
+		<h3>Register Now, or <a href="#signin" data-transition="slide" data-icon="" class="">Sign In</a></h3>
 		<table>
 			<tr class="spaceUnder">
-				<td> First Name</td><td><input type="text" name="fname"></input></td>
+				<td><input value="First Name" type="text" onfocusout="if(this.value==''){this.value='First Name'}" onfocus="if(this.value=='First Name'){this.value=''}" name="fname"></input></td>
 			</tr>
 			<tr class="spaceUnder">
-				<td>Last Initial</td><td><input type="text" name="linitial"></input></td>
+				<td><input value="Last Initial"  onfocusout="if(this.value==''){this.value='Last Initial'}" type="text" onfocus="this.value=''" name="linitial"></input></td>
 			</tr>
 			<tr class="spaceUnder">
-				<td>Email<br/><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid</label></td><td>  <input type="text" class="EmailTarget"  name="Email" id="EmailInput" value=""  /></td>
+				<td>  <input type="text" value="Email" class="EmailTarget"  onfocusout="if(this.value==''){this.value='Email'}"  name="Email" id="EmailInput" onfocus="this.value=''"  /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
 			</tr>
 			
 			<tr class="spaceUnder"> 
-				<td>Password</td><td><input class="PasswordTarget" type="password" name="password"></input></td>
+				<td><input value="password" class="PasswordTarget" type="password"  onfocusout="if(this.value==''){this.value='passw'}" onfocus="this.value=''" name="password"></input></td>
+				<td><label style="color:red;font-family:impact;" id="PasswordError" class="PasswordErrorTarget" >Password Must be atleast 6 characters</label></td>
+			</tr>
+			<tr class="spaceUnder"> 
+				<td><input value="password" class="PasswordMatchTarget" type="password"  onfocusout="if(this.value==''){this.value='passw'}" onfocus="this.value=''" name="passwordMatch"></input></td>
+				<td><label style="color:red;font-family:impact;" id="PasswordMatchError" class="PasswordMatchErrorTarget" >Password Must Match</label></td>
 			</tr>
 		</table>
   
  <script type="text/javascript">
+ $( "input" ).bind("focusout");
+ 
 $( ".EmailTarget" ).bind("change",function() {
   if(this.value.length <3 || this.value.search("@")==-1){
   $( ".EmailErrorTarget" ).show();
@@ -101,6 +114,134 @@ $( ".EmailTarget" ).bind("change",function() {
     $( ".EmailTarget" ).css("background","transparent");
   	}
 });
+
+
+$( ".PasswordTarget" ).bind("change",function() {
+  if(this.value.length <6){
+  $( ".PasswordErrorTarget" ).show();
+  $( ".PasswordTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".PasswordErrorTarget" ).hide();
+    $( ".PasswordTarget" ).css("background","transparent");
+  }
+  
+  if ($( ".PasswordMatchTarget" ).val() != this.value){
+  $( ".PasswordMatchErrorTarget" ).show();
+  $( ".PasswordMatchTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".PasswordMatchErrorTarget" ).hide();
+    $( ".PasswordMatchTarget" ).css("background","transparent");
+  	}
+	
+});
+
+
+$( ".PasswordMatchTarget" ).bind("change",function() {
+
+  if(this.value.length <6 || $( ".PasswordTarget" ).val() != this.value  ){
+  $( ".PasswordMatchErrorTarget" ).show();
+  $( ".PasswordMatchTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".PasswordMatchErrorTarget" ).hide();
+    $( ".PasswordMatchTarget" ).css("background","transparent");
+  	}
+});
+/*
+$( ".EmailTarget" ).change(function() {
+  if(this.value.length <3 || this.value.search("@")==-1)
+  alert("Invalid Email"); 
+*/
+</script>
+<!--<script>$('.headerChild').load('#headerProto')</script>-->
+</section> 
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+
+<!------------------------------------------------------------------>
+<!----------------------------Signin-------------------------------->
+<!------------------------------------------------------------------>
+<section data-role="page" id="signin" data-bind="with:SignInPage"  >
+
+<!--rgba(0,255,192,0.05)  rgba(255,255,0,0.05)-->
+ <!--TODO: <div class="headerChild"></div>-->
+ <!--header style="background-color:red;color:white;font-family:Georgia"-->
+	<div data-theme="a" data-role="header" data-id="persistent" data-position="fixed" role="banner" class="ui-header ui-bar-a ui-header-fixed slidedown" style="
+	    color: white;
+	    background-color: #22B14C;
+	    font-family:impact;
+	    
+	">K O M I T  </div>	
+		<h3>Sign in, or <a href="#signup" data-transition="slide" data-icon="" class="">Register Now!</a></h3>
+		<table>
+			
+			<tr class="spaceUnder">
+				<td>  <input type="text" value="Email" class="EmailTarget"  onfocusout="if(this.value==''){this.value='Email'}"  name="Email" id="EmailInput" onfocus="this.value=''"  /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
+			</tr>
+			
+			<tr class="spaceUnder"> 
+				<td><input value="password" class="PasswordTarget" type="password"  onfocusout="if(this.value==''){this.value='passw'}" onfocus="this.value=''" name="password"></input></td>
+				<td><label style="color:red;font-family:impact;" id="PasswordError" class="PasswordErrorTarget" >Password Required</label></td>
+			</tr>
+			<tr><td><a href="#Home" data-transition="slide" data-role="button">sign in</a></td></tr>
+		</table>
+  <!-- add button -->
+		
+ <script type="text/javascript">
+ 
+ //remember, ajax is used to load contents of each page into Dynamic object model as you navigate pages. doc.ready only loads for the first page. so subsequent pages need to be bound the the event pageint if they use jquery
+ $( "input" ).bind("focusout");
+ 
+$( ".EmailTarget" ).bind("change",function() {
+  if(this.value.length <3 || this.value.search("@")==-1){
+  $( ".EmailErrorTarget" ).show();
+  $( ".EmailTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".EmailErrorTarget" ).hide();
+    $( ".EmailTarget" ).css("background","transparent");
+  	}
+});
+
+
+$( ".PasswordTarget" ).bind("change",function() {
+  if(this.value.length <6){
+  $( ".PasswordErrorTarget" ).show();
+  $( ".PasswordTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".PasswordErrorTarget" ).hide();
+    $( ".PasswordTarget" ).css("background","transparent");
+  }
+  
+  if ($( ".PasswordMatchTarget" ).val() != this.value){
+  $( ".PasswordMatchErrorTarget" ).show();
+  $( ".PasswordMatchTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".PasswordMatchErrorTarget" ).hide();
+    $( ".PasswordMatchTarget" ).css("background","transparent");
+  	}
+	
+});
+
+
+$( ".PasswordMatchTarget" ).bind("change",function() {
+
+  if(this.value.length <6 || $( ".PasswordTarget" ).val() != this.value  ){
+  $( ".PasswordMatchErrorTarget" ).show();
+  $( ".PasswordMatchTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".PasswordMatchErrorTarget" ).hide();
+    $( ".PasswordMatchTarget" ).css("background","transparent");
+  	}
+});
 /*
 $( ".EmailTarget" ).change(function() {
   if(this.value.length <3 || this.value.search("@")==-1)
@@ -109,12 +250,222 @@ $( ".EmailTarget" ).change(function() {
 </script>
 <!--<script>$('.headerChild').load('#headerProto')</script>-->
 </section> 
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
 
-<!--------------------------------------------------------------->
-<!--------------------------------------------------------------->
-<!--------------------------------------------------------------->
-<!--------------------------------------------------------------->
-<!--------------------------------------------------------------->
+<!------------------------------------------------------------------>
+<!----------------------------verifyemail--------------------------->
+<!------------------------------------------------------------------>
+<section data-role="page" id="verifyemail" data-bind="with:verifyEmailPage"  >
+
+<!--rgba(0,255,192,0.05)  rgba(255,255,0,0.05)-->
+ <!--TODO: <div class="headerChild"></div>-->
+ <!--header style="background-color:red;color:white;font-family:Georgia"-->
+	<div data-theme="a" data-role="header" data-id="persistent" data-position="fixed" role="banner" class="ui-header ui-bar-a ui-header-fixed slidedown" style="
+	    color: white;
+	    background-color: #22B14C;
+	    font-family:impact;
+	    
+	">K O M I T  </div>	
+		<h3>click below to verify email</h3>
+		<table>
+			
+			<tr class="spaceUnder">
+				<td>  <input type="text" value="Email" class="EmailTarget"  onfocusout="if(this.value==''){this.value='Email'}"  name="Email" id="EmailInput" onfocus="this.value=''"  /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
+			</tr>
+			
+			<tr class="spaceUnder"> 
+				<td><input value="password" class="PasswordTarget" type="password"  onfocusout="if(this.value==''){this.value='passw'}" onfocus="this.value=''" name="password"></input></td>
+				<td><label style="color:red;font-family:impact;" id="PasswordError" class="PasswordErrorTarget" >Password Must be atleast 6 characters</label></td>
+			</tr>
+			
+		</table>
+  
+ <script type="text/javascript">
+ 
+ //remember, ajax is used to load contents of each page into Dynamic object model as you navigate pages. doc.ready only loads for the first page. so subsequent pages need to be bound the the event pageint if they use jquery
+ $( "input" ).bind("focusout");
+ 
+$( ".EmailTarget" ).bind("change",function() {
+  if(this.value.length <3 || this.value.search("@")==-1){
+  $( ".EmailErrorTarget" ).show();
+  $( ".EmailTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".EmailErrorTarget" ).hide();
+    $( ".EmailTarget" ).css("background","transparent");
+  	}
+});
+
+
+$( ".PasswordTarget" ).bind("change",function() {
+  if(this.value.length <6){
+  $( ".PasswordErrorTarget" ).show();
+  $( ".PasswordTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".PasswordErrorTarget" ).hide();
+    $( ".PasswordTarget" ).css("background","transparent");
+  }
+  
+  if ($( ".PasswordMatchTarget" ).val() != this.value){
+  $( ".PasswordMatchErrorTarget" ).show();
+  $( ".PasswordMatchTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".PasswordMatchErrorTarget" ).hide();
+    $( ".PasswordMatchTarget" ).css("background","transparent");
+  	}
+	
+});
+
+
+$( ".PasswordMatchTarget" ).bind("change",function() {
+
+  if(this.value.length <6 || $( ".PasswordTarget" ).val() != this.value  ){
+  $( ".PasswordMatchErrorTarget" ).show();
+  $( ".PasswordMatchTarget" ).css("background","rgba(255,0,0,0.3)");
+  }
+  else{
+  $( ".PasswordMatchErrorTarget" ).hide();
+    $( ".PasswordMatchTarget" ).css("background","transparent");
+  	}
+});
+/*
+$( ".EmailTarget" ).change(function() {
+  if(this.value.length <3 || this.value.search("@")==-1)
+  alert("Invalid Email");
+*/
+</script>
+<!--<script>$('.headerChild').load('#headerProto')</script>-->
+</section> 
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+
+
+
+<!------------------------------------------------------------------>
+<!----------------------------Home---------------------------------->
+<!------------------------------------------------------------------>
+<section data-role="page" id="Home" data-bind="with:HomePage"  >
+
+<!--rgba(0,255,192,0.05)  rgba(255,255,0,0.05)-->
+ <!--TODO: <div class="headerChild"></div>-->
+ <!--header style="background-color:red;color:white;font-family:Georgia"-->
+	<div data-theme="a" data-role="header" data-id="persistent" data-position="fixed" role="banner" class="ui-header ui-bar-a ui-header-fixed slidedown" style="
+	    color: white;
+	    background-color: #22B14C;
+	    font-family:impact;
+	    
+	">K O M I T  </div>	
+		<h3>Welcome!</h3>
+	
+	<!-- add commitment/habit: input-->
+	<!-- intrinsic/extrinsic motivation: input-->
+	<!-- detailed plan? -->
+	
+	
+	
+	
+	<!--top 3 commitments/habit (rule of 3)-->
+	<!-- internal critism/vent -->
+	
+	<!--others WELDS-->
+	
+	<!--Commitment detail dialouge + privacy + priority/no priotity-->
+  
+  
+ <script type="text/javascript">
+ 
+</script>
+
+</section> 
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+
+<!------------------------------------------------------------------>
+<!----------------------------Friend Feed--------------------------->
+<!------------------------------------------------------------------>
+<section data-role="page" id="FriendFeed" data-bind="with:FriendFeedPage"  >
+
+<!--rgba(0,255,192,0.05)  rgba(255,255,0,0.05)-->
+ <!--TODO: <div class="headerChild"></div>-->
+ <!--header style="background-color:red;color:white;font-family:Georgia"-->
+	<div data-theme="a" data-role="header" data-id="persistent" data-position="fixed" role="banner" class="ui-header ui-bar-a ui-header-fixed slidedown" style="
+	    color: white;
+	    background-color: #22B14C;
+	    font-family:impact;
+	    
+	">K O M I T  </div>	
+		<h3>Welcome!</h3>
+		
+<!-- find friend control -->		
+	
+<!-- List Friends Efforts -->
+
+<!-- Join Friend Control  -->
+
+<!-- Support Friends   requires websvc update   -->
+
+
+
+ <script type="text/javascript">
+ 
+</script>
+
+</section> 
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+
+
+
+<!------------------------------------------------------------------>
+<!----------------------------Public Feed--------------------------->
+<!------------------------------------------------------------------>
+<section data-role="page" id="PublicFeed" data-bind="with:PublicFeedPage"  >
+
+<!--rgba(0,255,192,0.05)  rgba(255,255,0,0.05)-->
+ <!--TODO: <div class="headerChild"></div>-->
+ <!--header style="background-color:red;color:white;font-family:Georgia"-->
+	<div data-theme="a" data-role="header" data-id="persistent" data-position="fixed" role="banner" class="ui-header ui-bar-a ui-header-fixed slidedown" style="
+	    color: white;
+	    background-color: #22B14C;
+	    font-family:impact;
+	    
+	">K O M I T  </div>	
+		<h3>Welcome!</h3>
+	
+<!-- List Friends Efforts -->
+
+<!-- Join Friend Control  -->
+
+<!-- Support Friends   requires websvc update   -->
+
+
+
+ <script type="text/javascript">
+ 
+</script>
+
+</section> 
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+
 <section id="list" data-role="page"  >
 
 
