@@ -39,7 +39,8 @@ body, input, select, textarea, button, .ui-btn
 
 tr.spaceUnder > td
 {
-	padding: 10px;
+	padding: 3px;
+	width:100%;
 }
 
 .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper
@@ -79,25 +80,25 @@ alert($("#email").id);
 	    font-family:impact;
 	    
 	">K O M I T  </div>	
-		<h3>Register Now, or <a href="#signin" data-transition="slide" data-icon="" class="">Sign In</a></h3>
+		<h3 style= "text-align:center">Sign Up </br> or <a href="#signin" data-transition="slide" data-icon="" class="">Sign In</a></h3>
 		<table>
 			<tr class="spaceUnder">
-				<td><input value="First Name" type="text" onfocusout="if(this.value==''){this.value='First Name'}" onfocus="if(this.value=='First Name'){this.value=''}" name="fname"></input></td>
+				<td><input placeholder="First Name" type="text" name="fname"></input></td>
 			</tr>
 			<tr class="spaceUnder">
-				<td><input value="Last Initial"  onfocusout="if(this.value==''){this.value='Last Initial'}" type="text" onfocus="this.value=''" name="linitial"></input></td>
+				<td><input placeholder="Last Initial"  type="text" name="linitial"></input></td>
 			</tr>
 			<tr class="spaceUnder">
-				<td>  <input type="text" value="Email" class="EmailTarget"  onfocusout="if(this.value==''){this.value='Email'}"  name="Email" id="EmailInput" onfocus="this.value=''"  /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
+				<td>  <input type="text" placeholder="Email" class="EmailTarget"  name="Email" id="EmailInput" /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
 			</tr>
 			
 			<tr class="spaceUnder"> 
-				<td><input value="password" class="PasswordTarget" type="password"  onfocusout="if(this.value==''){this.value='passw'}" onfocus="this.value=''" name="password"></input></td>
-				<td><label style="color:red;font-family:impact;" id="PasswordError" class="PasswordErrorTarget" >Password Must be atleast 6 characters</label></td>
+				<td><input placeholder="password" class="PasswordTarget" type="password" name="password"></input></td>
+				<td><label  style="color:red;font-family:impact; display:none" id="PasswordError" class="PasswordErrorTarget" >Password Must be atleast 6 characters</label></td>
 			</tr>
 			<tr class="spaceUnder"> 
-				<td><input value="password" class="PasswordMatchTarget" type="password"  onfocusout="if(this.value==''){this.value='passw'}" onfocus="this.value=''" name="passwordMatch"></input></td>
-				<td><label style="color:red;font-family:impact;" id="PasswordMatchError" class="PasswordMatchErrorTarget" >Password Must Match</label></td>
+				<td><input placeholder="re-enter password" class="PasswordMatchTarget" type="password" name="passwordMatch"></input></td>
+				<td><label style="color:red;font-family:impact; display:none" id="PasswordMatchError" class="PasswordMatchErrorTarget" >Password Must Match</label></td>
 			</tr>
 		</table>
   
@@ -159,7 +160,8 @@ $( ".EmailTarget" ).change(function() {
 </section> 
 <!------------------------------------------------------------------>
 <!------------------------------------------------------------------>
-<!------------------------------------------------------------------>
+<!----------------------------
+-------------------------------------->
 <!------------------------------------------------------------------>
 <!------------------------------------------------------------------>
 
@@ -181,11 +183,11 @@ $( ".EmailTarget" ).change(function() {
 		<table>
 			
 			<tr class="spaceUnder">
-				<td>  <input type="text" value="Email" class="EmailTarget"  onfocusout="if(this.value==''){this.value='Email'}"  name="Email" id="EmailInput" onfocus="this.value=''"  /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
+				<td>  <input type="text" placeholder="Email" class="EmailTarget"  name="Email" id="EmailInput" /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
 			</tr>
 			
 			<tr class="spaceUnder"> 
-				<td><input value="password" class="PasswordTarget" type="password"  onfocusout="if(this.value==''){this.value='passw'}" onfocus="this.value=''" name="password"></input></td>
+				<td><input placeholder="password" class="PasswordTarget" type="password" name="password"></input></td>
 				<td><label style="color:red;font-family:impact;" id="PasswordError" class="PasswordErrorTarget" >Password Required</label></td>
 			</tr>
 			<tr><td><a href="#Home" data-transition="slide" data-role="button">sign in</a></td></tr>
@@ -274,11 +276,11 @@ $( ".EmailTarget" ).change(function() {
 		<table>
 			
 			<tr class="spaceUnder">
-				<td>  <input type="text" value="Email" class="EmailTarget"  onfocusout="if(this.value==''){this.value='Email'}"  name="Email" id="EmailInput" onfocus="this.value=''"  /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
+				<td>  <input type="text" placeholder="Email" class="EmailTarget"  name="Email" id="EmailInput" /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
 			</tr>
 			
-			<tr class="spaceUnder"> 
-				<td><input value="password" class="PasswordTarget" type="password"  onfocusout="if(this.value==''){this.value='passw'}" onfocus="this.value=''" name="password"></input></td>
+			<tr class="spaceUnder"> <!--onfocusout="if(this.value==''){this.value='passw'}" onfocus="this.value=''"-->
+				<td><input placeholder="Password" value="" class="PasswordTarget" type="password"   name="password"></input></td>
 				<td><label style="color:red;font-family:impact;" id="PasswordError" class="PasswordErrorTarget" >Password Must be atleast 6 characters</label></td>
 			</tr>
 			
@@ -364,9 +366,11 @@ $( ".EmailTarget" ).change(function() {
 	    font-family:impact;
 	    
 	">K O M I T  </div>	
-		<h3>Welcome!</h3>
-	
+	 
+	<h3>Add an objective</h3>
 	<!-- add commitment/habit: input-->
+	<input type="text" name="NewObjective" id="NewObjective" value="" placeholder="New Objective"/>
+	 <a href="#Home" data-transition="slide" data-role="button">Save</a>
 	<!-- intrinsic/extrinsic motivation: input-->
 	<!-- detailed plan? -->
 	
@@ -374,15 +378,41 @@ $( ".EmailTarget" ).change(function() {
 	
 	
 	<!--top 3 commitments/habit (rule of 3)-->
+	<!--These actually need to be created by jqm-->
+		<input type="text" name="Objective1" class="Ojective1Target" id="Objective1" value="" />
+		<input type="text" style="color:red;font-weight:bold;" name="Objective2" class="Ojective2Target"  id="Objective2" value="test2" />
+		<input type="text" name="Objective3" class="Ojective3Target" id="Objective3"  value="test3" />
+	<!--http://demos.jquerymobile.com/1.1.0/docs/forms/docs-forms.html-->
+	
 	<!-- internal critism/vent -->
 	
-	<!--others WELDS-->
+	<!--others-->
 	
 	<!--Commitment detail dialouge + privacy + priority/no priotity-->
   
   
+
  <script type="text/javascript">
+this.$OuterDiv = $('<div></div>')
+    .hide()
+    .append($('<table></table>')
+        .attr({ cellSpacing : 0 })
+        .addClass("text")
+    )
+;
+
+ $( ".Ojective1Target" ).textinput({
+   create: function(event, ui) {   $( ".Ojective1Target" ).textinput('disable'); $( ".Ojective1Target" ).val('obj1_via_websvc');}
+});		
+ $( ".Ojective2Target" ).textinput({
+   create: function(event, ui) {   $( ".Ojective2Target" ).textinput('disable'); $( ".Ojective2Target" ).val('obj2_via_websvc');}
+});		
+ $( ".Ojective3Target" ).textinput({
+   create: function(event, ui) {   $( ".Ojective3Target" ).textinput('disable'); $( ".Ojective3Target" ).val('obj3_via_websvc');}
+});		
+		
  
+
 </script>
 
 </section> 
