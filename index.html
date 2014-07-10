@@ -89,20 +89,36 @@ alert($("#email").id);
 				<td><input placeholder="Last Initial"  type="text" name="linitial"></input></td>
 			</tr>
 			<tr class="spaceUnder">
-				<td>  <input type="text" placeholder="Email" class="EmailTarget"  name="Email" id="EmailInput" /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
-			</tr>
-			
+				<td>  <input type="text" placeholder="Email" class="EmailTarget"  name="Email" id="EmailInput" /></td>
+					</tr>
+
 			<tr class="spaceUnder"> 
 				<td><input placeholder="password" class="PasswordTarget" type="password" name="password"></input></td>
-				<td><label  style="color:red;font-family:impact; display:none" id="PasswordError" class="PasswordErrorTarget" >Password Must be atleast 6 characters</label></td>
-			</tr>
+				</tr>
 			<tr class="spaceUnder"> 
-				<td><input placeholder="re-enter password" class="PasswordMatchTarget" type="password" name="passwordMatch"></input></td>
-				<td><label style="color:red;font-family:impact; display:none" id="PasswordMatchError" class="PasswordMatchErrorTarget" >Password Must Match</label></td>
+				<td><input placeholder="re-enter password" class="PasswordMatchTarget" type="password" name="passwordMatch"></input></td><td></td>
 			</tr>
+			<tr>
+			<td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
+			</tr>
+			<tr>
+			<td><label  style="color:red;font-family:impact; display:none" id="PasswordError" class="PasswordErrorTarget" >Password Must be atleast 6 characters</label></td>
+		
+			</tr>
+			<tr>
+			<td><label style="color:red;font-family:impact; display:none" id="PasswordMatchError" class="PasswordMatchErrorTarget" >Password Must Match</label></td>
+			
+			</tr>
+				<tr><td><a  data-transition="slide" onclick="ValidateAndSubmit()" data-role="button">sign up</a></td></tr>
 		</table>
   
  <script type="text/javascript">
+ 
+ function ValidateAndSubmit()
+{
+window.location.href='#Home';
+}
+ 
  $( "input" ).bind("focusout");
  
 $( ".EmailTarget" ).bind("change",function() {
@@ -135,7 +151,7 @@ $( ".PasswordTarget" ).bind("change",function() {
   $( ".PasswordMatchErrorTarget" ).hide();
     $( ".PasswordMatchTarget" ).css("background","transparent");
   	}
-	
+
 });
 
 
@@ -183,12 +199,12 @@ $( ".EmailTarget" ).change(function() {
 		<table>
 			
 			<tr class="spaceUnder">
-				<td>  <input type="text" placeholder="Email" class="EmailTarget"  name="Email" id="EmailInput" /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget" >Invalid Email</label></td>
+				<td>  <input type="text" placeholder="Email" class="EmailTarget1"  name="Email" id="EmailInput" /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget1" >Invalid Email</label></td>
 			</tr>
 			
 			<tr class="spaceUnder"> 
-				<td><input placeholder="password" class="PasswordTarget" type="password" name="password"></input></td>
-				<td><label style="color:red;font-family:impact;" id="PasswordError" class="PasswordErrorTarget" >Password Required</label></td>
+				<td><input placeholder="password" class="PasswordTarget1" type="password" name="password"></input></td>
+				<td><label style="color:red;font-family:impact; display:none" id="PasswordError" class="PasswordErrorTarget1" >Invalid Password</label></td>
 			</tr>
 			<tr><td><a href="#Home" data-transition="slide" data-role="button">sign in</a></td></tr>
 		</table>
@@ -199,26 +215,26 @@ $( ".EmailTarget" ).change(function() {
  //remember, ajax is used to load contents of each page into Dynamic object model as you navigate pages. doc.ready only loads for the first page. so subsequent pages need to be bound the the event pageint if they use jquery
  $( "input" ).bind("focusout");
  
-$( ".EmailTarget" ).bind("change",function() {
+$( ".EmailTarget1" ).bind("change",function() {
   if(this.value.length <3 || this.value.search("@")==-1){
-  $( ".EmailErrorTarget" ).show();
-  $( ".EmailTarget" ).css("background","rgba(255,0,0,0.3)");
+  $( ".EmailErrorTarget1" ).show();
+  $( ".EmailTarget1" ).css("background","rgba(255,0,0,0.3)");
   }
   else{
-  $( ".EmailErrorTarget" ).hide();
-    $( ".EmailTarget" ).css("background","transparent");
+  $( ".EmailErrorTarget1" ).hide();
+    $( ".EmailTarget1" ).css("background","transparent");
   	}
 });
 
 
-$( ".PasswordTarget" ).bind("change",function() {
+$( ".PasswordTarget1" ).bind("change",function() {
   if(this.value.length <6){
-  $( ".PasswordErrorTarget" ).show();
-  $( ".PasswordTarget" ).css("background","rgba(255,0,0,0.3)");
+  $( ".PasswordErrorTarget1" ).show();
+  $( ".PasswordTarget1" ).css("background","rgba(255,0,0,0.3)");
   }
   else{
-  $( ".PasswordErrorTarget" ).hide();
-    $( ".PasswordTarget" ).css("background","transparent");
+  $( ".PasswordErrorTarget1" ).hide();
+    $( ".PasswordTarget1" ).css("background","transparent");
   }
   
   if ($( ".PasswordMatchTarget" ).val() != this.value){
