@@ -4,7 +4,8 @@
 <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://dl.dropboxusercontent.com/u/32423176/uicss.css"/>
-	
+
+ <script type="text/javascript" src= "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.js"></script>
  <script  type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>    
  <script  type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
  <script  type="text/javascript" src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
@@ -15,7 +16,7 @@
  <style>
  .ui-bar-a, .ui-page-theme-a .ui-bar-inherit, html .ui-bar-a .ui-bar-inherit, html .ui-body-a .ui-bar-inherit, html body .ui-group-theme-a .ui-bar-inherit
 {
-	backgroud-color:rgba(192,255,192,0.1) !important;
+	/*backgroud-color:rgba(192,255,192,0.1) !important;*/
 	border-color: #ddd;
 	color: #333;
 	font-weight: 100;
@@ -30,7 +31,7 @@ body, input, select, textarea, button, .ui-btn
 
 .ui-bar-a, .ui-page-theme-a .ui-bar-inherit, html .ui-bar-a .ui-bar-inherit, html .ui-body-a .ui-bar-inherit, html body .ui-group-theme-a .ui-bar-inherit
 {
-	backgroud-color:rgba(192,255,192,0.1) !important;
+	/*backgroud-color:rgba(192,255,192,0.1) !important;*/
 	border-color: #ddd;
 	color: #333;
 	text-shadow: 0 1px 0 #eee;
@@ -46,7 +47,7 @@ tr.spaceUnder > td
 .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper
 {
 
-background-color:rgba(192,255,192,0.1) !important;
+/*background-color:rgba(192,255,192,0.1) !important;*/
 border-color: #bbb;
 color: #333;
 text-shadow: 0 1px 0 #f3f3f3;
@@ -109,14 +110,27 @@ alert($("#email").id);
 			<td><label style="color:red;font-family:impact; display:none" id="PasswordMatchError" class="PasswordMatchErrorTarget" >Password Must Match</label></td>
 			
 			</tr>
-				<tr><td><a  data-transition="slide" onclick="ValidateAndSubmit()" data-role="button">sign up</a></td></tr>
+				<tr><td><a class="SaveButtonTarget" data-transition="slide" onclick="ValidateAndSubmit()" data-role="button">sign up</a></td></tr>
 		</table>
   
  <script type="text/javascript">
  
  function ValidateAndSubmit()
 {
+var allowEmail = new Boolean();
+
+var allowPass  = new Boolean();
+
+ allowEmail = $( ".EmailTarget" ).change();
+
+ allowPass = $( ".PasswordTarget" ).change();
+
+//alert($( ".PasswordTarget" ).val() != $( ".PasswordMatchTarget" ).val()); 
+
+if(Boolean(allowEmail) == true && Boolean(allowPass) ==true)
 window.location.href='#Home';
+
+return;
 }
  
  $( "input" ).bind("focusout");
@@ -125,18 +139,22 @@ $( ".EmailTarget" ).bind("change",function() {
   if(this.value.length <3 || this.value.search("@")==-1){
   $( ".EmailErrorTarget" ).show();
   $( ".EmailTarget" ).css("background","rgba(255,0,0,0.3)");
+  return false;
   }
   else{
   $( ".EmailErrorTarget" ).hide();
     $( ".EmailTarget" ).css("background","transparent");
+	return true;
   	}
 });
 
 
 $( ".PasswordTarget" ).bind("change",function() {
+var bool;
   if(this.value.length <6){
   $( ".PasswordErrorTarget" ).show();
   $( ".PasswordTarget" ).css("background","rgba(255,0,0,0.3)");
+  bool =  false;
   }
   else{
   $( ".PasswordErrorTarget" ).hide();
@@ -146,10 +164,12 @@ $( ".PasswordTarget" ).bind("change",function() {
   if ($( ".PasswordMatchTarget" ).val() != this.value){
   $( ".PasswordMatchErrorTarget" ).show();
   $( ".PasswordMatchTarget" ).css("background","rgba(255,0,0,0.3)");
+  return false;
   }
   else{
   $( ".PasswordMatchErrorTarget" ).hide();
     $( ".PasswordMatchTarget" ).css("background","transparent");
+	return true;
   	}
 
 });
@@ -160,10 +180,12 @@ $( ".PasswordMatchTarget" ).bind("change",function() {
   if(this.value.length <6 || $( ".PasswordTarget" ).val() != this.value  ){
   $( ".PasswordMatchErrorTarget" ).show();
   $( ".PasswordMatchTarget" ).css("background","rgba(255,0,0,0.3)");
+  return true;
   }
   else{
   $( ".PasswordMatchErrorTarget" ).hide();
     $( ".PasswordMatchTarget" ).css("background","transparent");
+	return false;
   	}
 });
 /*
@@ -199,12 +221,16 @@ $( ".EmailTarget" ).change(function() {
 		<table>
 			
 			<tr class="spaceUnder">
-				<td>  <input type="text" placeholder="Email" class="EmailTarget1"  name="Email" id="EmailInput" /></td><td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget1" >Invalid Email</label></td>
-			</tr>
+				<td>  <input type="text" placeholder="Email" class="EmailTarget1"  name="Email" id="EmailInput" /></td><td></td></tr>
 			
 			<tr class="spaceUnder"> 
 				<td><input placeholder="password" class="PasswordTarget1" type="password" name="password"></input></td>
-				<td><label style="color:red;font-family:impact; display:none" id="PasswordError" class="PasswordErrorTarget1" >Invalid Password</label></td>
+				</tr>
+			<tr>
+			<td><label style="display:none;color:red;font-family:impact;" id="EmailError" class="EmailErrorTarget1" >Invalid Email</label></td>			
+			</tr>
+			<tr>
+			<td><label style="color:red;font-family:impact; display:none" id="PasswordError" class="PasswordErrorTarget1" >Invalid Password</label></td>
 			</tr>
 			<tr><td><a href="#Home" data-transition="slide" data-role="button">sign in</a></td></tr>
 		</table>
@@ -382,49 +408,149 @@ $( ".EmailTarget" ).change(function() {
 	    font-family:impact;
 	    
 	">K O M I T  </div>	
-	 
-	<h3>Add an objective</h3>
+<div style = "border:5px;">	 
+	<h3>objectives</h3>
 	<!-- add commitment/habit: input-->
+	<div style="border-width: thin;border-style: outset;">
 	<input type="text" name="NewObjective" id="NewObjective" value="" placeholder="New Objective"/>
-	 <a href="#Home" data-transition="slide" data-role="button">Save</a>
+	 <a href="#Home" data-transition="slide" onclick="AddButtonClick()" data-role="button">Add</a>
 	<!-- intrinsic/extrinsic motivation: input-->
 	<!-- detailed plan? -->
 	
 	
-	
-	
+	<a href="#signin"> <!--html5 block element-->
 	<!--top 3 commitments/habit (rule of 3)-->
 	<!--These actually need to be created by jqm-->
-		<input type="text" name="Objective1" class="Ojective1Target" id="Objective1" value="" />
+	<div id="TextBoxesGroup"  name="TextBoxesGroup" placeholder="TextBoxesGroup" class="ui-input-text  ui-body-inherit ui-corner-all ui-shadow-inset" style=" border:5px;	cursor: default !important;	pointer-events: none;">
+	<!-- 	<input type="text" name="Objective1" class="Ojective1Target" id="Objective1" value="" />
 		<input type="text" style="color:red;font-weight:bold;" name="Objective2" class="Ojective2Target"  id="Objective2" value="test2" />
-		<input type="text" name="Objective3" class="Ojective3Target" id="Objective3"  value="test3" />
+		<input type="text" name="Objective3" class="Ojective3Target" id="Objective3" value="test3" />
+		 -->
+	</div>
+	</a>
+	<a href="#Home" data-transition="slide" onclick="EditButtonClick()">edit: move this functionality to detail view</a> <!-- detailed view talk about it-->
+	</div>
 	<!--http://demos.jquerymobile.com/1.1.0/docs/forms/docs-forms.html-->
 	
-	<!-- internal critism/vent -->
+	<!--Progress Chart -->
+	<div style="border-width: thin;border-style: outset;">
+	<!--bar graph for progress-->
+
+	<!---circle graph for completes, 3mo, 3day, 3 week-->
+
+	<!-- days on target/deadline met -->
 	
+	<!-- circle graph relationship, emotional, physical -->
+	<div >
+			<canvas id="canvas" height="450" width="450"></canvas>
+		</div>
+	
+	<!-- people inspired -->
+	
+	
+	</div>
 	<!--others-->
 	
 	<!--Commitment detail dialouge + privacy + priority/no priotity-->
   
-  
+  </div>
 
  <script type="text/javascript">
-this.$OuterDiv = $('<div></div>')
-    .hide()
-    .append($('<table></table>')
-        .attr({ cellSpacing : 0 })
-        .addClass("text")
-    )
-;
 
+ var radarChartData = {
+		labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+		datasets: [
+			{
+				label: "My First dataset",
+				fillColor: "rgba(220,220,220,0.2)",
+				strokeColor: "rgba(220,220,220,1)",
+				pointColor: "rgba(220,220,220,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(220,220,220,1)",
+				data: [65,59,90,81,56,55,40]
+			},
+			{
+				label: "My Second dataset",
+				fillColor: "rgba(151,187,205,0.2)",
+				strokeColor: "rgba(151,187,205,1)",
+				pointColor: "rgba(151,187,205,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(151,187,205,1)",
+				data: [28,48,40,19,96,27,100]
+			}
+		]
+	};
+
+	window.onload = function(){
+		window.myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData, {
+			responsive: true
+		});
+	}
+/*
+this doesn't work due to the pointer event : none :'(
+$( "div" ).bind("onclick");
+
+$("#TextBoxesGroup").bind("click", function(){
+alert(1);
+});*/
+ var dynamicInput = 0;
+ 
+  function AddButtonClick()
+{
+var newVal= $('#NewObjective').val();
+dynamicInput++;
+var newDivId= "NewDiv"+dynamicInput;
+var newTextBoxDiv = $(document.createElement("div")).attr("id",newDivId);//.css('ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset');
+newTextBoxDiv.addClass("ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"); //no semi-colon, why?
+var newTextBoxInput = $(document.createElement('input')).attr("id", 'newinput').attr("value",$('#NewObjective').val());/*.attr("style","margin: 0;min-height: 2.2em;text-align: left;border: 0;background: transparent none;-webkit-appearance: none;-webkit-border-radius: inherit;border-radius: inherit;background-color: rgba(255,255,255,.5);border-color: #ddd;color: #333;text-shadow: 0 1px 0 #f3f3f3;width:100%;padding:5px");*/
+
+newTextBoxInput.appendTo(newTextBoxDiv);
+newTextBoxDiv.appendTo("#TextBoxesGroup");
+//newTextBoxDiv.after().html('<input type="text" name="Objective'+dynamicInput+'" class="Ojective'+dynamicInput+"Target"+'" id="Objective'+dynamicInput+'" value="'+newVal+'" />');
+//newTextBoxDiv.attr("id",'newdiv');
+//this = newTextBoxDiv;//input needs to go in div ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset
+      /*  newTextBoxDiv.after().html('<input type="text" name="Objective3" class="Ojective3Target" id="Objective3" value="55" />'                                  
+                                  );*/
+  /* var newTextBoxDiv = $(document.createElement('div')).attr("id", 'TextBoxDiv' + 4);
+        newTextBoxDiv.after().html('<input type="text" name="Objective3" class="Ojective3Target" id="Objective3" value="55" />'                                  
+                                  );
+								  
+								  should consider:
+								  
+								  $('<input />', {
+    type: 'text',
+    name: 'test'
+}).appendTo("body");
+	*/		
+	        //newTextBoxInput.appendTo('#'+NewDiv);
+			
+			//$('#TextBoxesGroup').css('pointer-events', 'auto');
+			
+}							  
+ 
+
+  function EditButtonClick()
+{
+
+
+			
+			$('#TextBoxesGroup').css('pointer-events', 'auto');
+			$('#Objective1').focus();
+			
+}							  
+  
+ 
+ 
  $( ".Ojective1Target" ).textinput({
-   create: function(event, ui) {   $( ".Ojective1Target" ).textinput('disable'); $( ".Ojective1Target" ).val('obj1_via_websvc');}
+   create: function(event, ui) {   $( ".Ojective1Target" ).val('obj1_via_websvc');}
 });		
  $( ".Ojective2Target" ).textinput({
-   create: function(event, ui) {   $( ".Ojective2Target" ).textinput('disable'); $( ".Ojective2Target" ).val('obj2_via_websvc');}
+   create: function(event, ui) {   $( ".Ojective2Target" ).val('obj2_via_websvc');}
 });		
  $( ".Ojective3Target" ).textinput({
-   create: function(event, ui) {   $( ".Ojective3Target" ).textinput('disable'); $( ".Ojective3Target" ).val('obj3_via_websvc');}
+   create: function(event, ui) {   $( ".Ojective3Target" ).val('obj3_via_websvc');}
 });		
 		
  
