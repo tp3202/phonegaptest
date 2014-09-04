@@ -418,37 +418,85 @@ $( ".EmailTarget" ).change(function() {
 	<!-- detailed plan? -->
 	
 	
-	<a href="#signin"> <!--html5 block element-->
+	<!--<a href="#signin"> <!--html5 block element-->
 	<!--top 3 commitments/habit (rule of 3)-->
 	<!--These actually need to be created by jqm-->
-	<div id="TextBoxesGroup"  name="TextBoxesGroup" placeholder="TextBoxesGroup" class="ui-input-text  ui-body-inherit ui-corner-all ui-shadow-inset" style=" border:5px;	cursor: default !important;	pointer-events: none;">
+	<div id="TextBoxesGroup"  name="TextBoxesGroup" placeholder="TextBoxesGroup" class="ui-input-text  ui-body-inherit ui-corner-all ui-shadow-inset" style=" border:5px;	cursor: default !important;	pointer-events:none;">
 	<!-- 	<input type="text" name="Objective1" class="Ojective1Target" id="Objective1" value="" />
 		<input type="text" style="color:red;font-weight:bold;" name="Objective2" class="Ojective2Target"  id="Objective2" value="test2" />
 		<input type="text" name="Objective3" class="Ojective3Target" id="Objective3" value="test3" />
 		 -->
 	</div>
-	</a>
-	<a href="#Home" data-transition="slide" onclick="EditButtonClick()">edit: move this functionality to detail view</a> <!-- detailed view talk about it-->
+	<!--</a>-->
+	<!--<ul placeholder="ULControls" id="ULControls" data-role="listview">
+	<li></li>
+	
+	</ul>-->
+	
 	</div>
+<a href="#" style="padding-left:15px;" onclick="EditButtonClick()" >edit</a> 
+<a href="#" style="padding-left:15px;" onclick="SaveButtonClick()" >save</a> 
+<a href="#" style="padding-left:15px;" id="DeleteAnchor" onclick="DeleteButtonClick()" >delete</a> 
+<a href="#" style="padding-left:15px;" onclick="CancelButtonClick()" >cancel</a> 
+
+<div id="EditDialog" data-role="popup" style="padding:10px;" title="Edit Enabled">
+<a href="#" data-rel="back"  data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+
+  <p>Click objective to edit, don't forget to save.</p>
+</div>
+<div id="SaveDialog" data-role="popup" style="padding:10px;" title="Changes Saved">
+<a href="#"  data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+
+  <p>Saved!</p>
+</div>
+ 
 	<!--http://demos.jquerymobile.com/1.1.0/docs/forms/docs-forms.html-->
 	
-	<!--Progress Chart -->
 	<div style="border-width: thin;border-style: outset;">
+	<h3>Progress Journal</h3>
+	
+	<!-- list each one -->
+	<!-- met 3 day goal, 30 day, 3 month -->
+	<!--progress bar -->
+	<!-- plus sign -->
+	<!-- reset button -->
+	<label for="slider-fill">Input slider:</label>
+<input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" data-highlight="true" />
+	<!-- switch this to slider-->
+	<script>
+
+	</script> 
+	
+	</div>	
+	<!--Progress Chart -->
+	<a href="#signin">
+	<div style="border-width: thin;border-style: outset;">
+	<h3>Trends</h3>
 	<!--bar graph for progress-->
 
-	<!---circle graph for completes, 3mo, 3day, 3 week-->
+	<!---circle graph for completes/success rate, 3mo, 3day, 3 week-->
 
 	<!-- days on target/deadline met -->
 	
 	<!-- circle graph relationship, emotional, physical -->
-	<div >
-			<canvas id="canvas" height="450" width="450"></canvas>
+	<div  style="padding:25px">
+	<a href="#signup">
+			<canvas id="canvas" height="200px" width="200px"></canvas>
+			</a>
 		</div>
-	
-	<!-- people inspired -->
-	
-	
+
 	</div>
+	</a>
+
+			
+	<!-- people inspired -->
+	<!--just list them-->
+	<ul>
+	<li>
+	test name 1
+	</li>
+	</ul>
+	
 	<!--others-->
 	
 	<!--Commitment detail dialouge + privacy + priority/no priotity-->
@@ -488,6 +536,37 @@ $( ".EmailTarget" ).change(function() {
 			responsive: true
 		});
 	}
+	
+		var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+
+var barChartData = {
+labels : ["January","February","March","April","May","June","July"],
+datasets : [
+{
+fillColor : "rgba(220,220,220,0.5)",
+strokeColor : "rgba(220,220,220,0.8)",
+highlightFill: "rgba(220,220,220,0.75)",
+highlightStroke: "rgba(220,220,220,1)",
+data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+},
+{
+fillColor : "rgba(151,187,205,0.5)",
+strokeColor : "rgba(151,187,205,0.8)",
+highlightFill : "rgba(151,187,205,0.75)",
+highlightStroke : "rgba(151,187,205,1)",
+data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+}
+]
+
+}
+window.onload = function(){
+var ctx = document.getElementById("canvas").getContext("2d");
+window.myBar = new Chart(ctx).Bar(barChartData, {
+responsive : true
+});
+}
+
+
 /*
 this doesn't work due to the pointer event : none :'(
 $( "div" ).bind("onclick");
@@ -503,12 +582,21 @@ var newVal= $('#NewObjective').val();
 dynamicInput++;
 var newDivId= "NewDiv"+dynamicInput;
 var newTextBoxDiv = $(document.createElement("div")).attr("id",newDivId);//.css('ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset');
-newTextBoxDiv.addClass("ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"); //no semi-colon, why?
-var newTextBoxInput = $(document.createElement('input')).attr("id", 'newinput').attr("value",$('#NewObjective').val());/*.attr("style","margin: 0;min-height: 2.2em;text-align: left;border: 0;background: transparent none;-webkit-appearance: none;-webkit-border-radius: inherit;border-radius: inherit;background-color: rgba(255,255,255,.5);border-color: #ddd;color: #333;text-shadow: 0 1px 0 #f3f3f3;width:100%;padding:5px");*/
-
+newTextBoxDiv.addClass("ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"); //no semi-colon, why? pointer-events: auto;
+var newTextBoxInput = $(document.createElement('input')).attr("id", 'newinput').attr("value",$('#NewObjective').val())/*.attr("style","margin: 0;min-height: 2.2em;text-align: left;border: 0;background: transparent none;-webkit-appearance: none;-webkit-border-radius: inherit;border-radius: inherit;background-color: rgba(255,255,255,.5);border-color: #ddd;color: #333;text-shadow: 0 1px 0 #f3f3f3;width:100%;padding:5px");*/
 newTextBoxInput.appendTo(newTextBoxDiv);
+var newCheckMarkIconAnchor = $(document.createElement('a')).attr("id",'CheckAnchor').attr("value","increment");
+
+//need to append after
+$('<a href="#signin" ><img style="z-index:100%; pointer-events:auto;" src="http://png.findicons.com/files/icons/1588/farm_fresh_web/32/accept.png"></img></a>').after(newTextBoxDiv);
+
+
+$("#TextBoxDiv").after('<a href="#signin" ><img style="z-index:100%; pointer-events:auto;" src="http://png.findicons.com/files/icons/1588/farm_fresh_web/32/accept.png"></img></a>');
+
+newCheckMarkIconAnchor.appendTo(newTextBoxDiv);
 newTextBoxDiv.appendTo("#TextBoxesGroup");
-//newTextBoxDiv.after().html('<input type="text" name="Objective'+dynamicInput+'" class="Ojective'+dynamicInput+"Target"+'" id="Objective'+dynamicInput+'" value="'+newVal+'" />');
+
+
 //newTextBoxDiv.attr("id",'newdiv');
 //this = newTextBoxDiv;//input needs to go in div ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset
       /*  newTextBoxDiv.after().html('<input type="text" name="Objective3" class="Ojective3Target" id="Objective3" value="55" />'                                  
@@ -528,19 +616,57 @@ newTextBoxDiv.appendTo("#TextBoxesGroup");
 			
 			//$('#TextBoxesGroup').css('pointer-events', 'auto');
 			
+//$('#ULControls').append('<li><a href="index.html" data-role="button" data-icon="delete">Delete</a></li>').listview('refresh');
+	//	$('[data-role=page]').trigger('pagecreate');	
+			
 }							  
  
 
   function EditButtonClick()
 {
+$('#TextBoxesGroup').css('pointer-events', 'auto');
 
-
-			
-			$('#TextBoxesGroup').css('pointer-events', 'auto');
-			$('#Objective1').focus();
+$('#EditDialog').popup("open");
 			
 }							  
-  
+  function SaveButtonClick()
+{
+
+//this should really be the focusout function
+
+
+$('#TextBoxesGroup').css('pointer-events', 'none');
+
+$("#DeleteAnchor").css('pointer-events', 'auto');	
+//maybe use get doc by id wildcard
+$("input").unbind("click");
+
+$('#SaveDialog').popup("open");
+}	
+
+  function DeleteButtonClick()
+{
+
+var i = 0;
+$('#TextBoxesGroup').css('pointer-events', 'auto');
+
+$("#DeleteAnchor").css('pointer-events', 'none');	
+
+$( "input" ).click(function() {
+
+if(this.id.match("newinput")){
+
+  alert( "Item Deleted, don't forget to save" ); //make confirm dialouge and call savebuttonclick()
+ var i = this;
+ i.value = " ";
+ i.remove();
+ 
+ return;
+}
+});		
+
+return;
+}	 
  
  
  $( ".Ojective1Target" ).textinput({
